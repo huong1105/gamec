@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1739184426 source:c:\users\huanrophi\documents\bt test\coban\main.cpp
+	<iostream>
+	<SDL.h>
+
