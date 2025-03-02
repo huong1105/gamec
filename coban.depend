@@ -1,8 +1,10 @@
 # depslib dependency file v1.0
-1740412844 source:c:\users\huanrophi\documents\bt test\coban\main.cpp
+1740911137 source:c:\users\huanrophi\documents\bt test\coban\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 	<vector>
 	<algorithm>
+	<set>
+	<ctime>
 
