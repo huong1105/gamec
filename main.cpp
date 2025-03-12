@@ -1,13 +1,14 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <vector>
 #include <algorithm>
 #include <set>
 #include <ctime>
 using namespace std;
 
-const int SCREEN_WIDTH = 1800;
+const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 600;
 const char* WINDOW_TITLE = "Hi, robot";
 const int SPEED = 200;
@@ -16,6 +17,7 @@ const int SPEEDBULLET = 30;
 const int FIRE_RATE = 150;
 const int VIRUS_COUNT = 9;
 int FirstCoordinates = 30;
+bool gameOver = false;
 
 struct Bullet {
     int x, y;
@@ -23,7 +25,7 @@ struct Bullet {
 };
 
 struct Virus {
-    int x, y, size, hp;
+    int x, y, Size, hp;
     SDL_Color color;
 };
 
@@ -47,6 +49,11 @@ SDL_Window* initSDL(){
     SDL_Window* window = SDL_CreateWindow(WINDOW_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN /* || SDL_WINDOW_FULLSCREEN_DESKTOP */ );
 
     if(window == nullptr)   logErrorAndExit("CreateWindow", SDL_GetError());
+    if (TTF_Init() == -1) {
+            logErrorAndExit("SDL_ttf could not initialize! SDL_ttf Error: ",
+                             TTF_GetError());
+        }
+
     return window;
 }
 
@@ -63,6 +70,7 @@ SDL_Renderer* createRenderer(SDL_Window* window){
 }
 
 void quitSDL(SDL_Window* window, SDL_Renderer* renderer) {
+    TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -111,16 +119,20 @@ void shootBullet() {
 void updateViruses() {
     for (auto& virus : activeViruses) {
         virus.x -= 2;
+        if (virus.x <= 50) {
+            gameOver = true;
+            return;
+        }
     }
 }
 
 void renderViruses(SDL_Renderer* renderer) {
     for (const auto& virus : activeViruses) {
         SDL_SetRenderDrawColor(renderer, virus.color.r, virus.color.g, virus.color.b, 255);
-        drawCircle(renderer, virus.x, virus.y, virus.size);
+        drawCircle(renderer, virus.x, virus.y, virus.Size);
 
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_Rect healthBar = {virus.x - virus.size, virus.y + virus.size + 5, (virus.hp * virus.size) / 100, 5};
+        SDL_Rect healthBar = {virus.x - virus.Size, virus.y + virus.Size + 5, (virus.hp * virus.Size) / 100, 5};
         SDL_RenderFillRect(renderer, &healthBar);
     }
 }
@@ -142,11 +154,11 @@ void updateBullets() {
             for (auto it = activeViruses.begin(); it != activeViruses.end();) {
                 int dx = bullet.x - it->x;
                 int dy = bullet.y - it->y;
-                if (dx * dx + dy * dy <= it->size * it->size) {
+                if (dx * dx + dy * dy <= it->Size * it->Size) {
                     it->hp -= 20;
                     bullet.active = false;
                     if (it->hp <= 0) {
-                        it = activeViruses.erase(it); // Xóa virus nếu hết máu
+                        it = activeViruses.erase(it);
                         if (activeViruses.empty()) return;
                     }
                     else {
@@ -181,6 +193,7 @@ void handleEvents(bool& running) {
 }
 
 void renderImage(SDL_Renderer* renderer) {
+
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_Texture* background = loadTexture("character_cropped_preview_rev_1.png", renderer);
@@ -211,18 +224,48 @@ void spawnVirus() {
         lastVirusSpawnTime = currentTime;
 
         if (!viruses.empty()) {
-            // Chọn ngẫu nhiên một virus trong danh sách
             int index = rand() % viruses.size();
             Virus virus = viruses[index];
 
 
-            // Xóa virus khỏi danh sách viruses (để không in lại)
             viruses.erase(viruses.begin() + index);
 
-            // In virus ra màn hình
             activeViruses.push_back(virus);
         }
     }
+}
+
+bool showMenu(SDL_Renderer* renderer) {
+    SDL_Texture* menuTexture = loadTexture("menu.png", renderer);
+    if (!menuTexture) return false;
+
+    SDL_Event e;
+    bool running = true;
+
+    while (running) {
+        while (SDL_PollEvent(&e) != 0) {
+            if (e.type == SDL_QUIT) return false;
+
+            if (e.type == SDL_MOUSEBUTTONDOWN) {
+                int x = e.button.x, y = e.button.y;
+
+                if (x > 310 && x < 540 && y > 170 && y < 250) {
+                    running = false;
+                }
+
+                if (x > 650 && x < 920 && y > 170 && y < 250) {
+                    return false;
+                }
+            }
+        }
+
+        SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, menuTexture, NULL, NULL);
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_DestroyTexture(menuTexture);
+    return true;
 }
 
 void gameLoop(SDL_Renderer* renderer) {
@@ -230,25 +273,54 @@ void gameLoop(SDL_Renderer* renderer) {
     while (running) {
         handleEvents(running);
 
-        shootBullet();
-        updateBullets();
-        updateViruses();
-        spawnVirus(); // Mỗi 2 giây lấy một virus từ vector và xóa nó
-        renderImage(renderer);
-        if (activeViruses.empty() && viruses.empty()) {
-            running = false;
-            cout << "Game Over! All viruses have been eliminated." << endl;
+        if (!gameOver) {
+            shootBullet();
+            updateBullets();
+            updateViruses();
+            spawnVirus();
+            renderImage(renderer);
+        } else {
+            // Hiển thị màn hình "Game Over"
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_RenderClear(renderer);
+
+            // Tạo thông báo "Game Over"
+            SDL_Color textColor = {255, 0, 0, 255}; // Màu đỏ
+            TTF_Font* font = TTF_OpenFont("arial.ttf", 48);
+            if (!font) {
+                cout << "Failed to load font: " << TTF_GetError() << endl;
+                return;
+            }
+            SDL_Surface* textSurface = TTF_RenderText_Solid(font, "Game Over", textColor);
+            SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+            SDL_Rect textRect = {SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50, 200, 100};
+
+            SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+            SDL_RenderPresent(renderer);
+
+            // Giải phóng bộ nhớ
+            SDL_FreeSurface(textSurface);
+            SDL_DestroyTexture(textTexture);
+            TTF_CloseFont(font);
+
+            SDL_Delay(2000); // Hiển thị "Game Over" trong 2 giây
+            return; // Dừng game ngay lập tức
         }
 
         SDL_Delay(16);
     }
 }
 
+
 int main(int argc, char* argv[]) {
     srand(time(0));
     SDL_Window* window = initSDL();
     SDL_Renderer* renderer = createRenderer(window);
     prepareVirus();
+    if (!showMenu(renderer)) {
+        cout << "End!";
+        quitSDL(window, renderer);
+    }
     gameLoop(renderer);
     quitSDL(window, renderer);
     return 0;
