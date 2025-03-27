@@ -1,30 +1,35 @@
 # depslib dependency file v1.0
-1742148026 source:c:\users\huong\documents\baitapc\coban\main.cpp
+1743009609 source:c:\users\huong\documents\baitapc\coban\main.cpp
 	"defs.h"
 	"menu.h"
 	"prepare.h"
 	"graphics.h"
 	"update.h"
+	"end.h"
 
-1742148761 c:\users\huong\documents\baitapc\coban\defs.h
+1743008906 c:\users\huong\documents\baitapc\coban\defs.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
+	<SDL_mixer.h>
 	<vector>
 	<iostream>
 	<algorithm>
 	<ctime>
 
-1742149014 c:\users\huong\documents\baitapc\coban\menu.h
+1742398678 c:\users\huong\documents\baitapc\coban\menu.h
 	"defs.h"
 	"graphics.h"
 
-1742146634 c:\users\huong\documents\baitapc\coban\prepare.h
+1743001921 c:\users\huong\documents\baitapc\coban\prepare.h
 	"defs.h"
 
-1742148984 c:\users\huong\documents\baitapc\coban\graphics.h
+1743047533 c:\users\huong\documents\baitapc\coban\graphics.h
 	"defs.h"
 
-1742147654 c:\users\huong\documents\baitapc\coban\update.h
+1743047533 c:\users\huong\documents\baitapc\coban\update.h
+	"defs.h"
+
+1742403945 c:\users\huong\documents\baitapc\coban\end.h
 	"defs.h"
 
