@@ -7,8 +7,8 @@ void shootBullet(Mix_Chunk* gunshot, Mix_Chunk* enemyDeath, Mix_Chunk* hitImpact
     Uint32 currentTime = SDL_GetTicks();
     if (currentTime - lastFireTime >= FIRE_RATE) {
         bullets.push_back({210, FirstCoordinates + 45, true});
-        playgunshot(gunshot);
         lastFireTime = currentTime;
+        playgunshot(gunshot);
     }
 }
 
@@ -49,7 +49,11 @@ void updateBullets() {
         }
     }
 
-    bullets.erase(remove_if(bullets.begin(), bullets.end(), [](Bullet& b) { return !b.active; }), bullets.end());
+    bullets.erase(
+        remove_if(bullets.begin(), bullets.end(),
+        [](const Bullet& b) { return !b.active; }),
+        bullets.end()
+    );
 }
 
 void updateViruses() {

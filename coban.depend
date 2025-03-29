@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1743009609 source:c:\users\huong\documents\baitapc\coban\main.cpp
+1743261873 source:c:\users\huong\documents\baitapc\coban\main.cpp
 	"defs.h"
 	"menu.h"
 	"prepare.h"
@@ -7,7 +7,7 @@
 	"update.h"
 	"end.h"
 
-1743008906 c:\users\huong\documents\baitapc\coban\defs.h
+1743261873 c:\users\huong\documents\baitapc\coban\defs.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -21,13 +21,13 @@
 	"defs.h"
 	"graphics.h"
 
-1743001921 c:\users\huong\documents\baitapc\coban\prepare.h
+1743262069 c:\users\huong\documents\baitapc\coban\prepare.h
 	"defs.h"
 
-1743047533 c:\users\huong\documents\baitapc\coban\graphics.h
+1743261042 c:\users\huong\documents\baitapc\coban\graphics.h
 	"defs.h"
 
-1743047533 c:\users\huong\documents\baitapc\coban\update.h
+1743262005 c:\users\huong\documents\baitapc\coban\update.h
 	"defs.h"
 
 1742403945 c:\users\huong\documents\baitapc\coban\end.h

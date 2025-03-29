@@ -16,7 +16,7 @@ void prepareVirus(SDL_Renderer* renderer) {
 
 void spawnVirus() {
     Uint32 currentTime = SDL_GetTicks();
-    if (currentTime - lastVirusSpawnTime >= 2000 && !viruses.empty()) {
+    if (currentTime - lastVirusSpawnTime >= 3000 && !viruses.empty()) {
         lastVirusSpawnTime = currentTime;
         int index = rand() % viruses.size();
         activeViruses.push_back(viruses[index]);

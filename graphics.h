@@ -16,7 +16,7 @@ SDL_Window* initSDL() {
     if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) {
         logErrorAndExit( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
     }
-    Mix_AllocateChannels(16);
+    Mix_AllocateChannels(40);
     return window;
 }
 
@@ -67,7 +67,10 @@ Mix_Chunk* loadSound(const char* path) {
 }
 void playgunshot(Mix_Chunk* gChunk) {
     if (gChunk != nullptr) {
-        Mix_PlayChannel( -1, gChunk, 0 );
+        int channel = Mix_PlayChannel(-1, gChunk, 0);
+        if (channel != -1) {
+            Mix_Volume(channel, MIX_MAX_VOLUME / 3);
+        }
     }
 }
 

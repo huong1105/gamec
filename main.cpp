@@ -44,6 +44,7 @@ void gameLoop(SDL_Renderer* renderer) {
             lose(renderer);
             return;
         }
+        SDL_Delay(16);
     }
 }
 
