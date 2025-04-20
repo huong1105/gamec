@@ -35,6 +35,7 @@
 		<Unit filename="defs.h" />
 		<Unit filename="end.h" />
 		<Unit filename="graphics.h" />
+		<Unit filename="loop.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="menu.h" />
 		<Unit filename="prepare.h" />

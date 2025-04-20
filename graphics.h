@@ -16,7 +16,7 @@ SDL_Window* initSDL() {
     if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) {
         logErrorAndExit( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
     }
-    Mix_AllocateChannels(40);
+    Mix_AllocateChannels(50);
     return window;
 }
 
@@ -76,7 +76,10 @@ void playgunshot(Mix_Chunk* gChunk) {
 
 void playhitImpact(Mix_Chunk* gChunk) {
     if (gChunk != nullptr) {
-        Mix_PlayChannel( -1, gChunk, 0 );
+        int channel = Mix_PlayChannel( -1, gChunk, 0 );
+        if (channel != -1) {
+            Mix_Volume(channel, MIX_MAX_VOLUME);
+        }
     }
 }
 
@@ -112,7 +115,6 @@ void renderViruses(SDL_Renderer* renderer) {
 
         SDL_Rect dstRect = {virus.x, virus.y, virus.Size, virus.Size};
         SDL_RenderCopy(renderer, virus.viruses, NULL, &dstRect);
-
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_Rect healthBar = {virus.x + (virus.Size - ((virus.hps * barWidth) / 100))/2, virus.y + 4*virus.Size/5, (virus.hp * barWidth) / 100, barHeight};
         SDL_RenderFillRect(renderer, &healthBar);
@@ -122,7 +124,6 @@ void renderViruses(SDL_Renderer* renderer) {
 void renderImage(SDL_Renderer* renderer) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
-    SDL_Texture* background = loadTexture("background.png", renderer);
     SDL_QueryTexture(background, NULL, NULL, &bgWidth, &bgHeight);
 
     bgX -= SCROLL_SPEED;
@@ -135,23 +136,21 @@ void renderImage(SDL_Renderer* renderer) {
     SDL_Rect dstRect2 = {bgX + bgWidth, 0, bgWidth, bgHeight};
     SDL_RenderCopy(renderer, background, &srcRect, &dstRect1);
     SDL_RenderCopy(renderer, background, &srcRect, &dstRect2);
-    //SDL_RenderPresent(renderer);
     SDL_Delay(16);
 
-    SDL_Texture* character = loadTexture("character.png", renderer);
     SDL_Rect dstrect = {50, FirstCoordinates, 160, 120};
     SDL_RenderCopy(renderer, character, NULL, &dstrect);
 
     renderBullets(renderer);
     renderViruses(renderer);
     SDL_RenderPresent(renderer);
-    SDL_DestroyTexture(character);
-    SDL_DestroyTexture(background);
 }
 
 void quitSDL(SDL_Window* window, SDL_Renderer* renderer) {
     TTF_Quit();
     Mix_Quit();
+    SDL_DestroyTexture(character);
+    SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

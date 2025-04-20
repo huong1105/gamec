@@ -17,13 +17,13 @@ const int SCREEN_HEIGHT = 600;
 const char* WINDOW_TITLE = "Hi, robot";
 const int SPEED = 200;
 const int RADIUS = 5;
-const int SPEEDBULLET = 30;
-const int FIRE_RATE = 150;
+const int SPEEDBULLET = 40;
+const int FIRE_RATE = 400;
 const int SCROLL_SPEED = 2;
 int VIRUS_COUNT = 5;
 int FirstCoordinates = 30;
-int virusspeed = 5;
-int damage = 20;
+int virusspeed = 10;
+int damage = 50;
 int bgX = 0;
 int bgWidth, bgHeight;
 int barWidth = 50;
@@ -48,6 +48,12 @@ vector<int> positions = {15, 200, 400};
 
 Uint32 lastFireTime = 0;
 Uint32 lastVirusSpawnTime = 0;
+
+SDL_Texture* background = nullptr;
+SDL_Texture* character = nullptr;
+SDL_Texture* menu = nullptr;
+SDL_Texture* menu1 = nullptr;
+SDL_Texture* menu2 = nullptr;
 
 Mix_Music* Music = nullptr;
 Mix_Chunk* gunshot = nullptr;
