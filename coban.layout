@@ -2,44 +2,44 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="loop.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="menu.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-7" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1420" topLine="6" />
+			<Cursor1 position="1346" topLine="74" />
 		</Cursor>
 	</File>
-	<File name="end.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="end.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1633" topLine="25" />
+			<Cursor1 position="870" topLine="19" />
 		</Cursor>
 	</File>
-	<File name="menu.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="loop.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="260" topLine="0" />
+			<Cursor1 position="5216" topLine="124" />
 		</Cursor>
 	</File>
-	<File name="defs.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="defs.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="552" topLine="48" />
+			<Cursor1 position="355" topLine="11" />
 		</Cursor>
 	</File>
-	<File name="update.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="graphics.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="440" topLine="0" />
+			<Cursor1 position="2616" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="139" topLine="3" />
+			<Cursor1 position="504" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="prepare.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="update.h" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-5" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="442" topLine="0" />
+			<Cursor1 position="1635" topLine="18" />
 		</Cursor>
 	</File>
-	<File name="graphics.h" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="prepare.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="888" topLine="4" />
+			<Cursor1 position="722" topLine="6" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -16,10 +16,10 @@ const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 600;
 const char* WINDOW_TITLE = "Hi, robot";
 const int SPEED = 200;
-const int RADIUS = 5;
-const int SPEEDBULLET = 40;
-const int FIRE_RATE = 400;
+const int FIRE_RATE = 300;
 const int SCROLL_SPEED = 2;
+int SPEEDBULLET = 40;
+int RADIUS = 5;
 int VIRUS_COUNT = 5;
 int FirstCoordinates = 30;
 int virusspeed = 10;
@@ -29,6 +29,9 @@ int bgWidth, bgHeight;
 int barWidth = 50;
 int barHeight = 5;
 bool gameOver = false;
+int selected = 0;
+int fps = 60;
+int volume = 60;
 
 struct Bullet {
     int x, y;
@@ -44,10 +47,11 @@ struct Virus {
 vector<Bullet> bullets;
 vector<Virus> viruses;
 vector<Virus> activeViruses;
-vector<int> positions = {15, 200, 400};
 
-Uint32 lastFireTime = 0;
-Uint32 lastVirusSpawnTime = 0;
+unsigned int lastFireTime = 0;
+unsigned int lastVirusSpawnTime = 0;
+unsigned int currentTime = 0;
+unsigned int realtime = 0;
 
 SDL_Texture* background = nullptr;
 SDL_Texture* character = nullptr;
@@ -59,6 +63,5 @@ Mix_Music* Music = nullptr;
 Mix_Chunk* gunshot = nullptr;
 Mix_Chunk* hitImpact = nullptr;
 Mix_Chunk* enemyDeath = nullptr;
-
 
 #endif

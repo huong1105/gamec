@@ -10,15 +10,20 @@ int main(int argc, char* argv[]) {
     srand(time(0));
     SDL_Window* window = initSDL();
     SDL_Renderer* renderer = createRenderer(window);
-    prepareVirus(renderer);
     Music = loadMusic("dark-black-neon.mp3");
     play(Music);
-    if (!showMenu(renderer)) {
-        cout << "End!";
-        quitSDL(window, renderer);
-        return 0;
+    while(true){
+        if (!showMenu(renderer)) {
+            cout << "End!";
+            quitSDL(window, renderer);
+            return 0;
+        }
+        prepareVirus(renderer);
+        gameLoop(renderer);
+        gameOver = false;
+        viruses.clear();
+        bullets.clear();
+        activeViruses.clear();
     }
-    gameLoop(renderer);
-    quitSDL(window, renderer);
     return 0;
 }

@@ -39,6 +39,16 @@ SDL_Texture* loadTexture(const string& path, SDL_Renderer* renderer) {
     return newTexture;
 }
 
+SDL_Texture* renderText(const string& message, SDL_Color color, SDL_Renderer* renderer) {
+    TTF_Font* font = TTF_OpenFont("arial.ttf", 48);
+    SDL_Surface* surface = TTF_RenderText_Solid(font, message.c_str(), color);
+    if (!surface) return nullptr;
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    TTF_CloseFont(font);
+    return texture;
+}
+
 Mix_Music *loadMusic(const char* path){
     Mix_Music *gMusic = Mix_LoadMUS(path);
     if (gMusic == nullptr) {
@@ -64,12 +74,13 @@ Mix_Chunk* loadSound(const char* path) {
         SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR,
             "Could not load sound! SDL_mixer Error: %s", Mix_GetError());
     }
+    return gChunk;
 }
 void playgunshot(Mix_Chunk* gChunk) {
     if (gChunk != nullptr) {
         int channel = Mix_PlayChannel(-1, gChunk, 0);
         if (channel != -1) {
-            Mix_Volume(channel, MIX_MAX_VOLUME / 3);
+            Mix_Volume(channel, volume / 3);
         }
     }
 }
@@ -78,14 +89,17 @@ void playhitImpact(Mix_Chunk* gChunk) {
     if (gChunk != nullptr) {
         int channel = Mix_PlayChannel( -1, gChunk, 0 );
         if (channel != -1) {
-            Mix_Volume(channel, MIX_MAX_VOLUME);
+            Mix_Volume(channel, volume);
         }
     }
 }
 
 void playenemyDeath(Mix_Chunk* gChunk) {
     if (gChunk != nullptr) {
-        Mix_PlayChannel( -1, gChunk, 0 );
+        int channel = Mix_PlayChannel( -1, gChunk, 0 );
+        if (channel != -1) {
+            Mix_Volume(channel, volume);
+        }
     }
 }
 

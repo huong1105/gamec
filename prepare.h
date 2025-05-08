@@ -4,7 +4,10 @@
 #include "defs.h"
 
 void prepareVirus(SDL_Renderer* renderer) {
-    SDL_Texture* Virus[] = {loadTexture("1.png", renderer), loadTexture("2.png", renderer), loadTexture("3.png", renderer)};
+    SDL_Texture* Virus[] = {loadTexture("1.png", renderer),
+                            loadTexture("2.png", renderer),
+                            loadTexture("3.png", renderer)};
+    int positions[] = {15, 200, 400};
     int hps[] = {100, 200, 300};
     int Size[] = {140, 170, 200};
     for (int i = 0; i < 3; i++) {
@@ -15,8 +18,8 @@ void prepareVirus(SDL_Renderer* renderer) {
 }
 
 void spawnVirus() {
-    Uint32 currentTime = SDL_GetTicks();
-    if (currentTime - lastVirusSpawnTime >= 3000 && !viruses.empty()) {
+    int currentTime = SDL_GetTicks();
+    if (currentTime - lastVirusSpawnTime >= 1700 && !viruses.empty()) {
         lastVirusSpawnTime = currentTime;
         int index = rand() % viruses.size();
         activeViruses.push_back(viruses[index]);
