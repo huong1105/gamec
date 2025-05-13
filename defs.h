@@ -20,7 +20,7 @@ const int FIRE_RATE = 300;
 const int SCROLL_SPEED = 2;
 int SPEEDBULLET = 40;
 int RADIUS = 5;
-int VIRUS_COUNT = 5;
+int VIRUS_COUNT = 10;
 int FirstCoordinates = 30;
 int virusspeed = 10;
 int damage = 50;
@@ -29,6 +29,7 @@ int bgWidth, bgHeight;
 int barWidth = 50;
 int barHeight = 5;
 bool gameOver = false;
+bool showEffect = false;
 int selected = 0;
 int fps = 60;
 int volume = 60;
@@ -44,6 +45,16 @@ struct Virus {
     SDL_Texture* viruses;
 };
 
+struct Explosion {
+    float x, y;
+    int frame;
+    int maxFrame;
+    Uint32 lastFrameTime;
+    SDL_Texture* texture;
+};
+
+
+vector<Explosion> explosions;
 vector<Bullet> bullets;
 vector<Virus> viruses;
 vector<Virus> activeViruses;
@@ -52,12 +63,14 @@ unsigned int lastFireTime = 0;
 unsigned int lastVirusSpawnTime = 0;
 unsigned int currentTime = 0;
 unsigned int realtime = 0;
+SDL_Rect effectRect;
+
 
 SDL_Texture* background = nullptr;
 SDL_Texture* character = nullptr;
 SDL_Texture* menu = nullptr;
-SDL_Texture* menu1 = nullptr;
-SDL_Texture* menu2 = nullptr;
+SDL_Texture* explosion = nullptr;
+SDL_Texture* arrow = nullptr;
 
 Mix_Music* Music = nullptr;
 Mix_Chunk* gunshot = nullptr;

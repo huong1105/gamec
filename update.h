@@ -12,6 +12,22 @@ void shootBullet(Mix_Chunk* gunshot, Mix_Chunk* enemyDeath, Mix_Chunk* hitImpact
     }
 }
 
+void updateExplosions() {
+    Uint32 now = SDL_GetTicks();
+    for (auto it = explosions.begin(); it != explosions.end();) {
+        if (now - it->lastFrameTime > 50) {
+            it->frame++;
+            it->lastFrameTime = now;
+        }
+
+        if (it->frame >= it->maxFrame) {
+            it = explosions.erase(it);
+        } else {
+            ++it;
+        }
+    }
+}
+
 void updateBullets() {
     for (auto& bullet : bullets) {
         if (bullet.active) {
@@ -28,8 +44,18 @@ void updateBullets() {
                     bullet.active = false;
                     if (it->hp <= 0) {
                         playenemyDeath(enemyDeath);
+
+                        Explosion ex;
+                        ex.x = it->x + it->Size / 2 - 32;
+                        ex.y = it->y + it->Size / 2 - 32;
+                        ex.frame = 0;
+                        ex.maxFrame = 16;
+                        ex.lastFrameTime = SDL_GetTicks();
+                        ex.texture = explosion;
+                        explosions.push_back(ex);
+
                         if (it->Size == 200) {
-                            int box = rand() % 3;
+                            int box = rand() % 7;
                             realtime = SDL_GetTicks();
 
                             if (box == 0) {
@@ -42,6 +68,9 @@ void updateBullets() {
                             else{
                                 SPEEDBULLET = 55;
                             }
+
+                            showEffect = true;
+
                         }
                         it = activeViruses.erase(it);
                         if (activeViruses.empty()) return;

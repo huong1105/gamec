@@ -135,6 +135,22 @@ void renderViruses(SDL_Renderer* renderer) {
     }
 }
 
+void renderExplosions(SDL_Renderer* renderer) {
+    for (auto& ex : explosions) {
+        int frameW = 64;
+        int frameH = 64;
+        SDL_Rect src = {
+            (ex.frame % 4) * frameW,
+            (ex.frame / 4) * frameH,
+            frameW, frameH
+        };
+        SDL_Rect dst = {
+            (int)ex.x, (int)ex.y, frameW, frameH
+        };
+        SDL_RenderCopy(renderer, ex.texture, &src, &dst);
+    }
+}
+
 void renderImage(SDL_Renderer* renderer) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
@@ -153,18 +169,29 @@ void renderImage(SDL_Renderer* renderer) {
     SDL_Delay(16);
 
     SDL_Rect dstrect = {50, FirstCoordinates, 160, 120};
+    if(showEffect){
+        SDL_Rect arrowRect;
+        arrowRect.w = 44;
+        arrowRect.h = 44;
+        arrowRect.x = dstrect.x + (dstrect.w - arrowRect.w) / 2;
+        arrowRect.y = dstrect.y - arrowRect.h + 5;
+
+        SDL_RenderCopy(renderer, arrow, NULL, &arrowRect);
+        showEffect = false;
+    }
     SDL_RenderCopy(renderer, character, NULL, &dstrect);
 
     renderBullets(renderer);
     renderViruses(renderer);
+    renderExplosions(renderer);
+
     SDL_RenderPresent(renderer);
 }
 
 void quitSDL(SDL_Window* window, SDL_Renderer* renderer) {
     TTF_Quit();
     Mix_Quit();
-    SDL_DestroyTexture(character);
-    SDL_DestroyTexture(background);
+    Mix_FreeMusic(Music);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

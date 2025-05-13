@@ -2,44 +2,73 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="menu.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-7" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1346" topLine="74" />
-		</Cursor>
-	</File>
 	<File name="end.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="870" topLine="19" />
+			<Cursor1 position="870" topLine="0" />
 		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="24" />
+			<Collapse line="33" />
+		</Folding>
 	</File>
-	<File name="loop.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5216" topLine="124" />
-		</Cursor>
-	</File>
-	<File name="defs.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="355" topLine="11" />
+			<Cursor1 position="500" topLine="14" />
 		</Cursor>
 	</File>
 	<File name="graphics.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2616" topLine="0" />
+			<Cursor1 position="6077" topLine="23" />
+		</Cursor>
+		<Folding>
+			<Collapse line="5" />
+			<Collapse line="10" />
+			<Collapse line="22" />
+			<Collapse line="30" />
+			<Collapse line="41" />
+			<Collapse line="51" />
+			<Collapse line="60" />
+			<Collapse line="70" />
+			<Collapse line="78" />
+			<Collapse line="87" />
+			<Collapse line="96" />
+			<Collapse line="109" />
+			<Collapse line="117" />
+			<Collapse line="126" />
+		</Folding>
+	</File>
+	<File name="menu.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-7" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4568" topLine="104" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
+	<File name="update.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-5" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="504" topLine="0" />
+			<Cursor1 position="1988" topLine="47" />
+		</Cursor>
+		<Folding>
+			<Collapse line="5" />
+			<Collapse line="96" />
+		</Folding>
+	</File>
+	<File name="loop.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6696" topLine="155" />
 		</Cursor>
 	</File>
-	<File name="update.h" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-5" zoom_2="0">
+	<File name="defs.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1635" topLine="18" />
+			<Cursor1 position="474" topLine="15" />
 		</Cursor>
 	</File>
 	<File name="prepare.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="722" topLine="6" />
+			<Cursor1 position="722" topLine="0" />
 		</Cursor>
+		<Folding>
+			<Collapse line="5" />
+			<Collapse line="19" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>

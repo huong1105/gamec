@@ -20,7 +20,12 @@ int main(int argc, char* argv[]) {
         }
         prepareVirus(renderer);
         gameLoop(renderer);
-        gameOver = false;
+        SDL_DestroyTexture(character);
+        SDL_DestroyTexture(background);
+        Mix_FreeChunk(gunshot);
+        Mix_FreeChunk(hitImpact);
+        Mix_FreeChunk(enemyDeath);
+        SDL_DestroyTexture(explosion);
         viruses.clear();
         bullets.clear();
         activeViruses.clear();
